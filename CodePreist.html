@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodePriest - Hardware-Software Engineering Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <i class="fas fa-code"></i> CodePriest
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h1>CodePriest</h1>
+            <p>Bridging Hardware & Software Engineering<br>
+            Specialized solutions for SMBs, Manufacturers & Startups</p>
+            <a href="#services" class="cta-button">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <h2 class="fade-in">Core Services</h2>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                <h3>Embedded Systems</h3>
+                <p>IoT development on Raspberry Pi, Arduino, ESP32. PCB design, firmware in C/C++, hardware-software integration.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Software Development</h3>
+                <p>Custom apps, mobile (Flutter), web APIs (Django/Node.js), MVP builds for startups.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>IT Infrastructure</h3>
+                <p>Network security, Linux/Windows servers, IT support, custom PC builds.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-searchengin"></i></div>
+                <h3>Consulting & AI</h3>
+                <p>Tech advisory, automation scripts, data analytics, ML models, IT audits.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon"><i class="fas fa-bug"></i></div>
+                <h3>CodePriest Special</h3>
+                <p>Code auditing, legacy system upgrades, security vulnerability exorcisms.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <h2 class="fade-in">Target Markets & Pricing</h2>
+        <div class="pricing-table">
+            <div class="pricing-card fade-in">
+                <h3>SMBs</h3>
+                <div class="price">$500</div>
+                <p>IT Audit + Setup</p>
+                <p><strong>Pro:</strong> $2k/mo Retainer</p>
+            </div>
+            <div class="pricing-card featured fade-in">
+                <h3>Manufacturing</h3>
+                <div class="price">$1k</div>
+                <p>Automation Script</p>
+                <p><strong>Pro:</strong> $5k IoT Network</p>
+            </div>
+            <div class="pricing-card fade-in">
+                <h3>Startups</h3>
+                <div class="price">$3k</div>
+                <p>MVP Build</p>
+                <p><strong>Pro:</strong> Equity + $1k/mo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Launch Plan -->
+    <section class="section">
+        <h2 class="fade-in">Student Entrepreneur Launch Plan</h2>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <h3>Month 1: Portfolio</h3>
+                <p>GitHub projects, YouTube tutorials, 3 freelance gigs ($1k revenue)</p>
+            </div>
+            <div class="service-card fade-in">
+                <h3>Platforms</h3>
+                <p>Upwork ($20-50/hr PCB/Arduino), Fiverr ($50-200 scripts)</p>
+            </div>
+            <div class="service-card fade-in">
+                <h3>Niche Focus</h3>
+                <p>Industrial IoT sensors – low competition, high margins</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <h2 class="fade-in">Ready to Build?</h2>
+        <p class="fade-in">Drop your project idea for a free technical consultation</p>
+        <div class="contact-links">
+            <a href="mailto:thapelofata07@gmail.com" class="contact-link" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/thapelo-fata-815a12352" class="contact-link" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://wa.me/+263 78 098 3721" class="contact-link" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 CodePriest. Engineering by THAPELO FATA</p>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+        <div id="chatbot-toggle">💬 Chat</div>
+        <div id="chatbot-window" style="display: none;">
+            <div id="chatbot-header">CodePriest Assistant</div>
+            <div id="chatbot-messages">
+                <div class="message bot">Hello! How can I help you with your hardware-software engineering needs?</div>
+            </div>
+            <input type="text" id="chatbot-input" placeholder="Type your message...">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
