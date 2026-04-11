@@ -1,8 +1,15 @@
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const targetSelector = this.getAttribute('href');
+        const target = document.querySelector(targetSelector);
+
+        if (!target) {
+            return;
+        }
+
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
+        target.scrollIntoView({
             behavior: 'smooth'
         });
     });
@@ -26,9 +33,60 @@ document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
 
+// Card pop-out interaction
+const interactiveCards = document.querySelectorAll('.service-card, .pricing-card');
+let activeCard = null;
+
+function closeActiveCard() {
+    if (!activeCard) {
+        return;
+    }
+
+    activeCard.classList.remove('card-popout-active');
+    activeCard.removeAttribute('aria-expanded');
+    document.body.classList.remove('card-popout-open');
+    activeCard = null;
+}
+
+interactiveCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (activeCard === card) {
+            return;
+        }
+
+        closeActiveCard();
+        activeCard = card;
+        activeCard.classList.add('card-popout-active');
+        activeCard.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('card-popout-open');
+    });
+
+    card.addEventListener('mouseleave', () => {
+        if (activeCard === card) {
+            closeActiveCard();
+        }
+    });
+});
+
+document.addEventListener('click', () => {
+    closeActiveCard();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeActiveCard();
+    }
+});
+
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
+    if (!nav) {
+        return;
+    }
+
     if (window.scrollY > 100) {
         nav.style.background = 'rgba(10, 10, 10, 0.98)';
     } else {
@@ -42,6 +100,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatbotWindow = document.getElementById('chatbot-window');
     const chatbotInput = document.getElementById('chatbot-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
+
+    // Not all pages include the chatbot UI.
+    if (!chatbotToggle || !chatbotWindow || !chatbotInput || !chatbotMessages) {
+        return;
+    }
 
     // Toggle chatbot window
     chatbotToggle.addEventListener('click', function() {
