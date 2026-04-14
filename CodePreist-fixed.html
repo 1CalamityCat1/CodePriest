@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodePriest - Hardware Software Engineering</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles-updated.css">
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader">
+    <div class="plane-track">
+      <div class="trail"></div>
+      <div class="plane">
+        <svg viewBox="0 0 36 36" fill="none">
+          <path d="M4 22L2 26L10 24L18 30L16 20L28 14L32 4L22 8L16 20L6 18L4 22Z" fill="#185FA5" stroke="#378ADD" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="load-label">Loading...</div>
+    <div class="load-bar-wrap">
+      <div class="load-bar"></div>
+    </div>
+  </div>
+
+  <!-- Main site -->
+  <div class="site">
+    <!-- Nav -->
+    <nav>
+      <div class="nav-container">
+        <a href="CodePreist.html" class="logo">
+          <div class="logo-icon">CP</div>
+          <span>Code<span>Priest</span></span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="service.html">Full Services</a></li>
+          <li><a href="about us.html">About</a></li>
+          <li><a href="Contact Us.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero fade-in" id="home">
+      <div class="badge">
+        <div class="badge-dot"></div>
+        Now open for projects
+      </div>
+      <h1>Sacred code.</h1>
+      <h1 class="headline-accent">Crafted with precision.</h1>
+      <p class="subline">
+        CodePriest builds clean, powerful hardware-software solutions. From embedded IoT systems
+        to bulletproof software architecture. Perfection engineered.
+      </p>
+      <div class="cta-row">
+        <a href="Contact Us.html" class="btn-primary">Start Project</a>
+        <a href="about us.html" class="btn-primary">Our Work</a>
+      </div>
+      <div class="code-strip">
+        <div class="code-tag">const priest = "legendary"</div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section fade-in" id="services">
+      <h2>Our Core Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-microchip service-icon"></i>
+          <h3>Embedded Systems</h3>
+          <p>IoT on ESP32/Arduino/Raspberry Pi, PCB design, C++ firmware, hardware integration.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-laptop-code service-icon"></i>
+          <h3>Software Development</h3>
+          <p>Flutter mobile, Django/Node APIs, web apps, startup MVPs.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-shield-alt service-icon"></i>
+          <h3>IT Infrastructure</h3>
+          <p>Network security, server setup, IT audits, custom hardware builds.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-brain service-icon"></i>
+          <h3>Consulting & AI</h3>
+          <p>Tech advisory, automation, data analytics, machine learning models.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section fade-in" id="pricing">
+      <h2>Pricing Plans</h2>
+      <div class="pricing-table">
+        <div class="pricing-card">
+          <h3>SMB IT Audit</h3>
+          <div class="price">$500+</div>
+          <p>Security review & recommendations</p>
+        </div>
+        <div class="pricing-card featured">
+          <h3>IoT Automation</h3>
+          <div class="price">$1,000+</div>
+          <p>Sensor networks & firmware</p>
+        </div>
+        <div class="pricing-card">
+          <h3>Startup MVP</h3>
+          <div class="price">$3,000+</div>
+          <p>Full app + deployment</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chatbot Toggle -->
+    <div id="chatbot">
+      <div id="chatbot-toggle">💬 Ask Priest</div>
+      <div id="chatbot-window" style="display: none;">
+        <div id="chatbot-header">CodePriest Assistant</div>
+        <div id="chatbot-messages"></div>
+        <div>
+          <input id="chatbot-input" placeholder="Ask about services...">
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 CodePriest. Engineered by Thapelo Fata | Harare, Zimbabwe</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

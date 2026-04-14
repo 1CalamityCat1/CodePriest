@@ -1,17 +1,35 @@
+// Unified CodePriest script.js - smooth scroll, animations, interactions, loader, chatbot
+
+// Loader animation & site reveal
+document.addEventListener('DOMContentLoaded', function() {
+  const loader = document.querySelector('.loader');
+  const site = document.querySelector('.site');
+  const nav = document.querySelector('nav');
+  const hero = document.querySelector('.hero');
+
+  if (loader && site) {
+    // Hide loader after 3.4s
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      site.classList.add('revealed');
+      
+      // Stagger animations
+      setTimeout(() => nav.classList.add('visible'), 200);
+      setTimeout(() => hero.classList.add('fade-in'), 500);
+    }, 3400);
+  }
+});
+
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        const targetSelector = this.getAttribute('href');
-        const target = document.querySelector(targetSelector);
-
-        if (!target) {
-            return;
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
-
-        e.preventDefault();
-        target.scrollIntoView({
-            behavior: 'smooth'
-        });
     });
 });
 
@@ -34,129 +52,88 @@ document.querySelectorAll('.fade-in').forEach(el => {
 });
 
 // Card pop-out interaction
-const interactiveCards = document.querySelectorAll('.service-card, .pricing-card');
 let activeCard = null;
 
 function closeActiveCard() {
-    if (!activeCard) {
-        return;
+    if (activeCard) {
+        activeCard.classList.remove('card-popout-active');
+        document.body.classList.remove('card-popout-open');
+        activeCard = null;
     }
-
-    activeCard.classList.remove('card-popout-active');
-    activeCard.removeAttribute('aria-expanded');
-    document.body.classList.remove('card-popout-open');
-    activeCard = null;
 }
 
-interactiveCards.forEach(card => {
+document.querySelectorAll('.service-card, .pricing-card').forEach(card => {
     card.addEventListener('click', (e) => {
         e.stopPropagation();
-
-        if (activeCard === card) {
-            return;
-        }
-
+        if (activeCard === card) return;
+        
         closeActiveCard();
         activeCard = card;
-        activeCard.classList.add('card-popout-active');
-        activeCard.setAttribute('aria-expanded', 'true');
+        card.classList.add('card-popout-active');
         document.body.classList.add('card-popout-open');
     });
-
-    card.addEventListener('mouseleave', () => {
-        if (activeCard === card) {
-            closeActiveCard();
-        }
-    });
+    
+    card.addEventListener('mouseleave', closeActiveCard);
 });
 
-document.addEventListener('click', () => {
-    closeActiveCard();
-});
-
+document.addEventListener('click', closeActiveCard);
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeActiveCard();
-    }
+    if (e.key === 'Escape') closeActiveCard();
 });
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
-    if (!nav) {
-        return;
-    }
-
-    if (window.scrollY > 100) {
+    if (nav && window.scrollY > 100) {
         nav.style.background = 'rgba(10, 10, 10, 0.98)';
-    } else {
+    } else if (nav) {
         nav.style.background = 'rgba(10, 10, 10, 0.95)';
     }
 });
 
-// Chatbot functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const chatbotToggle = document.getElementById('chatbot-toggle');
+// Chatbot
+const chatbotToggle = document.getElementById('chatbot-toggle');
+if (chatbotToggle) {
     const chatbotWindow = document.getElementById('chatbot-window');
     const chatbotInput = document.getElementById('chatbot-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
 
-    // Not all pages include the chatbot UI.
-    if (!chatbotToggle || !chatbotWindow || !chatbotInput || !chatbotMessages) {
-        return;
-    }
-
-    // Toggle chatbot window
-    chatbotToggle.addEventListener('click', function() {
-        if (chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '') {
-            chatbotWindow.style.display = 'flex';
-        } else {
-            chatbotWindow.style.display = 'none';
-        }
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
     });
 
-    // Handle input
-    chatbotInput.addEventListener('keypress', function(e) {
+    chatbotInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            const userMessage = chatbotInput.value.trim();
-            if (userMessage) {
-                addMessage('user', userMessage);
+            const message = chatbotInput.value.trim();
+            if (message) {
+                addMessage('user', message);
                 chatbotInput.value = '';
-                respondToMessage(userMessage);
+                setTimeout(() => respondToMessage(message), 500);
             }
         }
     });
 
-    function addMessage(sender, message) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}`;
-        messageDiv.textContent = message;
-        chatbotMessages.appendChild(messageDiv);
+    function addMessage(sender, text) {
+        const div = document.createElement('div');
+        div.className = `message ${sender}`;
+        div.textContent = text;
+        chatbotMessages.appendChild(div);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
 
     function respondToMessage(message) {
-        const lowerMessage = message.toLowerCase();
-        let response = '';
-
-        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-            response = 'Greetings! I\'m the CodePriest assistant. How can I help with your hardware-software engineering project?';
-        } else if (lowerMessage.includes('services') || lowerMessage.includes('what do you do')) {
-            response = 'We specialize in: Embedded Systems (IoT, PCB design), Software Development (apps, APIs), IT Infrastructure, and Consulting & AI. What interests you?';
-        } else if (lowerMessage.includes('pricing') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
-            response = 'Our pricing: SMBs from $500 (IT Audit), Manufacturing from $1k (Automation), Startups from $3k (MVP). Contact us for a custom quote!';
-        } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
-            response = 'Reach out via email: thapelofata07@gmail.com, WhatsApp: +263 78 098 3721, or check our LinkedIn profile.';
-        } else if (lowerMessage.includes('embedded') || lowerMessage.includes('iot') || lowerMessage.includes('arduino') || lowerMessage.includes('raspberry')) {
-            response = 'We excel in embedded systems! From IoT sensors to custom PCBs, we handle hardware-software integration. What\'s your project?';
-        } else if (lowerMessage.includes('software') || lowerMessage.includes('app') || lowerMessage.includes('web')) {
-            response = 'Our software expertise covers mobile apps (Flutter), web APIs (Django/Node.js), and custom solutions. Need an MVP?';
-        } else if (lowerMessage.includes('consulting') || lowerMessage.includes('ai') || lowerMessage.includes('automation')) {
-            response = 'We provide tech consulting, automation scripts, data analytics, and ML models. Perfect for optimizing your operations!';
-        } else {
-            response = 'I\'m here to help with hardware-software engineering questions. Ask about our services, pricing, or contact info!';
+        const lower = message.toLowerCase();
+        let response = 'CodePriest engineer here. Ask about services, pricing, or contact!';
+        
+        if (lower.includes('hello') || lower.includes('hi')) {
+            response = 'Greetings! Ready for hardware-software engineering?';
+        } else if (lower.includes('embedded') || lower.includes('iot')) {
+            response = 'Embedded systems experts: ESP32, Arduino, PCB design.';
+        } else if (lower.includes('contact')) {
+            response = 'Email: thapelofata07@gmail.com | WhatsApp: +263 78 098 3721';
         }
-
-        setTimeout(() => addMessage('bot', response), 500);
+        
+        addMessage('bot', response);
     }
-});
+}
+
